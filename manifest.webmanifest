@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "ツタワタリ",
+  "short_name": "ツタワタリ",
+  "description": "長押しで揺れて、離してジャンプ。ツタからツタへ、世界を進む縦画面ゲーム。",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#071b20",
+  "theme_color": "#102c32",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,7 @@
+node_modules/
+artifacts/
+.DS_Store
+dist/
+game.html
+prototype.html
+video/
