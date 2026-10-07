@@ -50,6 +50,23 @@ npm run browser-check
 
 `npm run browser-check` は、実際のゲーム入力で全40区間を自動通過するブラウザ確認ページ `artifacts/journey-check.html` を作ります。日本がゴール前に表示されないこと、距離表示がないこともこの確認で調べます。Nodeの単体テストは成功範囲、ツタ全体の捕捉、失敗後の再開、タイム・ミスの累計などを検証します。画面サイズ別のPlaywright確認を行う場合は `npm install --save-dev playwright-core` の後 `npm run e2e` を実行してください。インストール済みのChromeが必要です。
 
+### 告知動画
+
+```sh
+npm install              # 初回のみ（playwright-core と ffmpeg-static）
+npm run promo            # 全コマを撮影して書き出す
+PROMO_EVERY=15 npm run promo       # 確認用: 15コマおきの一覧画像だけ作る
+PROMO_ENCODE_ONLY=1 npm run promo  # 撮り直さずに音と書き出しだけやり直す
+```
+
+実際のゲーム画面をヘッドレスのChrome（インストール済みのもの）で1コマずつ撮り、縦型 1080×1920・30fps・約30秒・-14 LUFS の MP4 にします。出力はアプリの隣の `../video/` です（`tsutawatari-promo.mp4`、表紙 `tsutawatari-promo-cover.jpg`、確認用の一覧 `tsutawatari-promo-sheet.jpg`）。動画はリポジトリに含めません。
+
+- `tools/promo/scenario.js`: 台本（場面・字幕・演出）。行き先は動画でも明かしません。
+- `tools/promo/promo.css`: 背景・字幕・エンドカードの見た目。
+- `tools/promo/record.mjs`, `stage.js`: 撮影と書き出しの道具。
+- 音はゲームのBGM・効果音（Web Audio合成）と、BGMの拍に合わせて合成したリズムだけで、外部音源は使いません。
+- ゲーム側の撮影用入口は `window.__game` の `manual` / `step` / `state()` / `touchDown` / `touchUp` / `drainEvents` / `audio` です。
+
 ### 主なファイル
 
 - `physics.js`: 振り子、ジャンプ、ツタの当たり判定。
