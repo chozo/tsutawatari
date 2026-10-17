@@ -28,4 +28,6 @@ await writeFile(new URL('tsutawatari.html',dist),singleFile);
 const gameRoute=new URL('tsutawatari/',dist);
 await mkdir(gameRoute,{recursive:true});
 await writeFile(new URL('index.html',gameRoute),singleFile);
+// SNS共有用のOGP画像。index.html の og:image は https://game.chozo.net/tsutawatari/ogp.png を指す。
+await copyFile(new URL('assets/ogp.png',root),new URL('ogp.png',gameRoute));
 console.log('Built game.html, tsutawatari.html (offline single-file), and dist/ (static web app).');

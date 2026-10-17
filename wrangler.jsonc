@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "tsutawatari",
+  "compatibility_date": "2026-10-06",
+  // 公開中の設定（2026-10-06 の初回デプロイ）をそのまま引き継ぐ
+  "workers_dev": true,
+  "preview_urls": false,
+  // 静的アセットだけを配信（Worker スクリプトなし）。
+  // URL の /tsutawatari/ に合わせ、dist/tsutawatari/ に出力している
+  "assets": { "directory": "./dist" },
+  "routes": [
+    { "pattern": "game.chozo.net/tsutawatari*", "zone_name": "chozo.net" }
+  ]
+}

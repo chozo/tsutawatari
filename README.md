@@ -50,6 +50,15 @@ npm run browser-check
 
 `npm run browser-check` は、実際のゲーム入力で全40区間を自動通過するブラウザ確認ページ `artifacts/journey-check.html` を作ります。日本がゴール前に表示されないこと、距離表示がないこともこの確認で調べます。Nodeの単体テストは成功範囲、ツタ全体の捕捉、失敗後の再開、タイム・ミスの累計などを検証します。画面サイズ別のPlaywright確認を行う場合は `npm install --save-dev playwright-core` の後 `npm run e2e` を実行してください。インストール済みのChromeが必要です。
 
+### OGP画像
+
+```sh
+npm run ogp                     # 実際のゲーム画面を撮って assets/ogp.png（1200×630）を作り直す
+OGP_VINE=19 npm run ogp         # 背景を別のエリアにする（ツタの番号を指定）
+```
+
+`npm run build` で `dist/tsutawatari/ogp.png` にコピーされ、`index.html` の `og:image` から `https://game.chozo.net/tsutawatari/ogp.png` として参照されます。
+
 ### 告知動画
 
 ```sh
@@ -75,11 +84,12 @@ PROMO_ENCODE_ONLY=1 npm run promo  # 撮り直さずに音と書き出しだけ�
 - `scenery.js`: 9エリアの背景。
 - `game.js`: 描画、タッチ・キーボード入力、音、設定保存。
 - `assets/explorer.png`: 主人公の透過イラスト。
+- `assets/ogp.png`: SNS共有用のOGP画像（`npm run ogp` で生成）。
 - `tools/`: ビルド、難易度計測、ブラウザ確認。
 
 ## 公開状況
 
-公開先はCloudflare Workersで、ゲームは次のURLでプレイできます。
+公開先はCloudflare Workersで、ゲームは次のURLでプレイできます。`npm run deploy` でビルドしてから `wrangler.jsonc` の設定（Worker名 `tsutawatari`、ルート `game.chozo.net/tsutawatari*`）で公開します。
 
 - [ツタワタリをプレイ](https://game.chozo.net/tsutawatari/)
 
