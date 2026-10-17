@@ -1,16 +1,17 @@
 #!/usr/bin/env node
-// SNS共有用のOGP画像（1200×630）を作る。実際のゲーム画面を撮り、タイトル文字を重ねて assets/ogp.png に書き出す。
+// SNS共有用のOGP画像（1200×630）を作る。実際のゲーム画面を撮り、タイトル文字を重ねて public/ogp.png に書き出す。
 //
-//   node tools/ogp/make-ogp.mjs [出力先]   既定は assets/ogp.png
+//   node tools/ogp/make-ogp.mjs [出力先]   既定は public/ogp.png
 import http from 'node:http';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve,extname} from 'node:path';
 import {chromium} from 'playwright-core';
 
-const root=resolve(import.meta.dirname,'../..'),out=resolve(process.argv[2]||resolve(root,'assets/ogp.png'));
+const root=resolve(import.meta.dirname,'../..'),out=resolve(process.argv[2]||resolve(root,'public/ogp.png'));
 const VINE=Number(process.env.OGP_VINE||0);
 const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.png':'image/png','.webmanifest':'application/manifest+json'};
-const server=http.createServer(async(req,res)=>{try{const p=new URL(req.url,'http://x').pathname;const f=resolve(root,'.'+(p==='/'?'/index.html':p));res.writeHead(200,{'Content-Type':types[extname(f)]||'application/octet-stream'}).end(await readFile(f));}catch{res.writeHead(404).end();}});
+// public/ のファイル（favicon.svg など）は公開時と同じくルートのパスで返す
+const server=http.createServer(async(req,res)=>{try{const p=new URL(req.url,'http://x').pathname;const f=resolve(root,'.'+(p==='/'?'/index.html':p));const body=await readFile(f).catch(()=>readFile(resolve(root,'public','.'+p)));res.writeHead(200,{'Content-Type':types[extname(f)]||'application/octet-stream'}).end(body);}catch{res.writeHead(404).end();}});
 await new Promise(r=>server.listen(0,r));
 const browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{channel:'chrome'});
 try{

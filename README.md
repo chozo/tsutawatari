@@ -53,11 +53,11 @@ npm run browser-check
 ### OGP画像
 
 ```sh
-npm run ogp                     # 実際のゲーム画面を撮って assets/ogp.png（1200×630）を作り直す
+npm run ogp                     # 実際のゲーム画面を撮って public/ogp.png（1200×630）を作り直す
 OGP_VINE=19 npm run ogp         # 背景を別のエリアにする（ツタの番号を指定）
 ```
 
-`npm run build` で `dist/tsutawatari/ogp.png` にコピーされ、`index.html` の `og:image` から `https://game.chozo.net/tsutawatari/ogp.png` として参照されます。
+`npm run build` で `public/` の中身が `dist/tsutawatari/` にコピーされ、`index.html` の `og:image` から `https://game.chozo.net/tsutawatari/ogp.png` として参照されます。
 
 ### 告知動画
 
@@ -84,7 +84,7 @@ PROMO_ENCODE_ONLY=1 npm run promo  # 撮り直さずに音と書き出しだけ�
 - `scenery.js`: 9エリアの背景。
 - `game.js`: 描画、タッチ・キーボード入力、音、設定保存。
 - `assets/explorer.png`: 主人公の透過イラスト。
-- `assets/ogp.png`: SNS共有用のOGP画像（`npm run ogp` で生成）。
+- `public/`: 公開ルートにそのまま置くファイル。`favicon.svg`（ファビコン）と `ogp.png`（SNS共有用のOGP画像、`npm run ogp` で生成）。
 - `tools/`: ビルド、難易度計測、ブラウザ確認。
 
 ## 公開状況
