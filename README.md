@@ -89,7 +89,7 @@ PROMO_ENCODE_ONLY=1 npm run promo  # 撮り直さずに音と書き出しだけ�
 
 ## 公開状況
 
-公開先はCloudflare Workersで、ゲームは次のURLでプレイできます。`npm run deploy` でビルドしてから `wrangler.jsonc` の設定（Worker名 `tsutawatari`、ルート `game.chozo.net/tsutawatari*`）で公開します。
+公開先はCloudflare Workersで、ゲームは次のURLでプレイできます。`npm run deploy` でビルドしてから `wrangler.jsonc` の設定（Worker名 `tsutawatari`、ルート `game.chozo.net/tsutawatari` と `game.chozo.net/tsutawatari/*`）で公開します。
 
 - [ツタワタリをプレイ](https://game.chozo.net/tsutawatari/)
 

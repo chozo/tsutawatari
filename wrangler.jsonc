@@ -9,6 +9,7 @@
   // URL の /tsutawatari/ に合わせ、dist/tsutawatari/ に出力している
   "assets": { "directory": "./dist" },
   "routes": [
-    { "pattern": "game.chozo.net/tsutawatari*", "zone_name": "chozo.net" }
+    { "pattern": "game.chozo.net/tsutawatari", "zone_name": "chozo.net" },
+    { "pattern": "game.chozo.net/tsutawatari/*", "zone_name": "chozo.net" }
   ]
 }
